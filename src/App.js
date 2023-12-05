@@ -1,23 +1,29 @@
-import './App.css';
-import React, { useEffect } from 'react'
-import eventsData from "./data";
-import Calander from './Components/Calander';
-import Events from './Components/Events';
-import { CommonContext } from './contextAPI';
+import "./App.css";
+import React, { useEffect } from "react";
+import Calander from "./Components/Calander";
+import Events from "./Components/Events";
+import { CommonContext } from "./contextAPI";
+import HandleEvents from "./Components/handleEvents";
 
 function App() {
-  const {data,setData,getEventValues} = CommonContext()
-  useEffect(()=>{
-    
+  const {
+    data: { clicked },
+    getEventValues,
+  } = CommonContext();
+  useEffect(() => {
+    getEventValues();
+  }, []);
 
-    getEventValues()
-  },[])
-  console.log(data)
   return (
     <div className="App">
-      <Calander/>
-      <Events/>
-    
+      {clicked ? (
+        <HandleEvents editType={true} />
+      ) : (
+        <>
+          <Calander />
+          <Events />
+        </>
+      )}
     </div>
   );
 }

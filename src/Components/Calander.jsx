@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { CommonContext } from '../contextAPI'
-import dayjs from 'dayjs';
+
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -10,7 +10,7 @@ import HandleEvents from './handleEvents';
 
 
 const Calander = () => {
-    const {data,setData,getEventValues} = CommonContext()
+    const {data,getEventValues} = CommonContext()
     const handleChange = (newValue) => {
       getEventValues(newValue)
     }
@@ -24,7 +24,7 @@ const Calander = () => {
         </DemoItem>
       </DemoContainer>
     </LocalizationProvider>
-    <HandleEvents/>
+    <HandleEvents editType={false}/>
     </div>
   )
 }

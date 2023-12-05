@@ -6,16 +6,14 @@ const context = createContext();
 export const CommonContext = () => useContext(context);
 
 const ContextProvider = ({ children }) => {
-  const storedData = localStorage.getItem("newData");
-  let newArray = [];
-  if (storedData) {
-    newArray = JSON.parse(storedData);
-  }
-
+  const storedData = JSON.parse(localStorage.getItem("newData")) || [];
+  const storedDeletedData = JSON.parse(localStorage.getItem("deleteData")) || [];
+  const newData = eventsData.filter((item) => !storedDeletedData.includes(item.id))
   const [data, setData] = useState({
-    eventsData,
-    eventsData: [...eventsData, ...newArray],
+    eventsData: [...newData, ...storedData],
     selectedDate: dayjs(new Date()),
+    clicked:false,
+    id:""
   });
   const [formData, setFormData] = useState({
     title: "",
